@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Line chart</title>
+  <link rel="stylesheet" type="text/css" href="Line.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <style media="screen">
+  #upload {
+  padding: 5px;
+  color: rgb(250, 248, 248);
+  background-color: rgb(79, 243, 88);
+  border: 1px solid #000000;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#upload:hover {
+  background-color: rgb(35, 102, 8);
+}
+#custom-text {
+  margin-left: 10px;
+  font-family: sans-serif;
+  color: #aaa;
+}
+#CreateChart{
+  padding: 5px;
+  color: rgb(250, 248, 248);
+  background-color: rgb(79, 243, 88);
+  border: 1px solid #000000;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50; /* Green */
+  position:absolute;
+  transition: .5s ease;
+  top: 172%;
+  left: 42%;
+  
+}
+#CreateChart:hover {
+  background-color: rgb(35, 102, 8);
+}
+</style>
+</head>
+  <body>
+     <!----NavigationBar---->
+<section id="nav-bar">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+      <a class="navbar-brand" href="#"><img src="img/logo03.png"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="line.html">LINE CHART</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pie.html">PIE CHART</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link " href="bar.html" >BAR CHART</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="#" >ACCOUNT</a>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#" ></a>
+          </li>
+        </ul>
+      </div>
+  </nav>    
+</section>
+      <h1>Line Chart</h1>
+      <div class = "linechart">
+        <h2>Customize your visualization</h2>
+      <form method="post" id="linechart" action="">
+          
+          <label> Chart Title </label><br>
+          <input type="text" name="ctitle" id="title"
+          placeholder="Enter your Chart Title"><br><br>
+          <label> X-Title </label><br>
+          <input type="text" name="xtitle" id="title"
+          placeholder="Enter your X-Title"><br><br>
+          <label> Y-Title </label><br>
+          <input type="text" name="ytitle" id="title"
+          placeholder="Enter your Y-Title"><br><br>
+          <label> Height </label><br>
+         <input type="number" id="height" name="height" step="1" min="0" max="1000"
+          placeholder="select height"><br><br>
+          <label> Width </label><br>
+          <input type="number" id="width" name="width" step="1" min="0" max="1000"
+          placeholder="select width"><br><br>
+          <div class="inline-div">
+            <p align="center">X-Values</p>
+            <textarea cols="15" rows="15" class="inline-txtarea"></textarea> 
+        </div>
+        <div class="inline-div">
+        <p align="center">Y-Values</p>
+            <textarea cols="15" rows="15" class="inline-txtarea"></textarea>  
+        </div><br><br>
+        <input type="submit"  id="CreateChart" value="Create Chart"  />
+        <br><br>
+        <label> Or upload your CSV file </label><br>
+          <input type="file" id="real-file" hidden="hidden"/>
+          <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+          <script type="text/javascript">
+              $(function () {
+                  $("#upload").bind("click", function () {
+                      var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+                      if (regex.test($("#fileUpload").val().toLowerCase())) {
+                          if (typeof (FileReader) != "undefined") {
+                              var reader = new FileReader();
+                              reader.onload = function (e) {
+                                  var entities = new Array();
+                                  var rows = e.target.result.split("\r\n");
+                                  for (var i = 0; i < rows.length; i++) {
+                                      var cells = rows[i].split(",");
+                                      if (cells.length > 1) {
+                                          var entity = {};
+                                          entity.rows = cells[0];
+                                          entity.colums = cells[1];
+                                          entities.push(entity);
+                                      }
+                                  }
+                                  $("#dvCSV").html('');
+                                  $("#dvCSV").append(JSON.stringify(entities));
+                              }
+                              reader.readAsText($("#fileUpload")[0].files[0]);
+                          } else {
+                              alert("This browser does not support HTML5.");
+                          }
+                      } else {
+                          alert("Please upload a valid CSV file.");
+                      }
+                  });
+              });
+          </script>
+          <input type="file" id="fileUpload" />
+          <input type="button" id="upload" value="Upload" />
+          <hr />
+          <div id="dvCSV">
+          </div>
+          
+    
+
+          </script>
+      </form>
+      </div>
+  </body>
+</html>

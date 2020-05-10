@@ -1,0 +1,129 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+/*--------Navigation--------*/
+#nav-bar
+{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+
+.navbar-nav li
+{
+    padding: 0 10px;
+}
+.navbar-nav a
+{
+    float: right;
+    text-align: left;
+}
+#nav-bar ul li a:hover
+{
+    color: orangered;
+
+}
+.nav-bar
+{
+    background: #fff;
+}
+.navbar-toggler
+{
+    border: none!important;
+    font-weight: 600;
+    font-size: 16px;
+}
+/*--------bar chart----*/
+CSS
+{
+    margin: 0;
+    padding: 0;
+ }
+ .inline-div {
+    display:inline-block;
+}
+.inline-txtarea {
+    resize: none;
+    border : 2px ;
+    height:125px;
+}
+body{
+    background-image: url(picture.jpeg);
+    background-size: 100% 1000px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+h1{
+    text-align: center;
+    padding: 20px;
+    color: blue;
+
+}
+h1::after
+{
+    content: '';
+    background: rgba(0,0,0,0.8);
+    display: block;
+    height: 3px;
+    width: 170px;
+    margin: 20px auto 5px;
+}
+h2{
+    text-align: center;
+    padding: 20px;   
+    color: rgb(244, 249, 252) 
+} 
+.piechart
+{
+    
+        background-color:rgb(7, 7, 7);
+        width: 500px;
+        margin: 0px 0px 0px 450px;
+        color: white;
+        font-size: 18px;
+        padding: 20px;
+        border-radius: 10px;
+}
+#piechart{
+    margin-left: 100px;
+}
+label{
+    color: white;
+    font-family: sans-serif;
+    font-size: 18px;
+    font-style: normal;
+}
+#title{
+    width: 300px;
+    border: none;
+    border-radius: 3px;
+    outline: 0px;
+    padding: 7px;
+}
+#height{
+    width: 230px;
+    padding: 7px;
+    border: none;
+    border-radius: 3px;
+    outline: 0;
+}
+#width{
+    width: 230px;
+    padding: 7px;
+    border: none;
+    border-radius: 3px;
+    outline: 0;
+}
+#sub{
+    width: 200px;
+    padding: 7px;
+    font-size: 12px;
+    font-family: sans-serif;
+    font-style: normal;
+    border: none;
+    border-radius: 3px;
+    outline: 0;
+}
