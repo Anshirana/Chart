@@ -13,7 +13,6 @@
 <script type="text/javascript" src="canvasjs.min.js"></script>
 <script type="text/javascript" src="chart.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <style media="screen">
 #upload {
 padding: 5px;
@@ -89,65 +88,69 @@ cursor: pointer;
       <h1>Bar Chart</h1>
       <div class = "barchart">
         <h2>Customize your visualization</h2>
-      <form method="GET" id="barchart" action="javascript:function" form name="form1">
-          
+        <div style="display: none;" id="barchart"></div>
+        <form>
           <label> Chart Title </label><br>
-          <input type="text" name="title" id="txt"
-          placeholder="Enter your Chart Title"><br><br>
-          <label> X-Title </label><br>
-          <input type="text" name="xtitle" id="title"
-          placeholder="Enter your X-Title"><br><br>
-          <label> Y-Title </label><br>
-          <input type="text" name="ytitle" id="title"
-          placeholder="Enter your Y-Title"><br><br>
-          <label> Height </label><br>
-         <input type="number" id="height" name="height" step="1" min="0" max="1000"
-          placeholder="select height"><br><br>
-          <label> Width </label><br>
-          <input type="number" id="width" name="width" step="1" min="0" max="1000"
-          placeholder="select width"><br><br>
-          X Value:
-          <input id="xValue" type="number" step="any" placeholder="Enter X-Value"> <br><br>
-          Y Value:
-          <input id="yValue" type="number" step="any" placeholder="Enter Y-Value">
-          <div id="chartContainer" style="height: 270px; width: 100%;">
-          </div>
-          <input type="submit"  id="CreateChart" value="Create Chart" >
-        
-
-        <script type="text/javascript">
-          window.onload = function() 
-
-          {
-              var dps = []; //dataPoints. 
-  
-              var chart = new CanvasJS.Chart("chartContainer", {
-                  title: {
-                      text:title
-                  },
-                  data: [{
-                      type: "bar",
-                      dataPoints: dps
-                  }]
-              });
-  
-              function addDataPointsAndRender() {
-                  xValue = Number(document.getElementById("xValue").value);
-                  yValue = Number(document.getElementById("yValue").value);
-                  dps.push({
-                      x: xValue,
-                      y: yValue
-                  });
-                  chart.render();
-              }
-  
-              var renderButton = document.getElementById("CreateChart");
-              renderButton.addEventListener("click", addDataPointsAndRender);
-          }
-          
-
-      </script>
-          
+              <input type="text" name="ctitle" id="ctitle"
+              placeholder="Enter your Chart Title"><br><br>
+              <label> Height </label><br>
+             <input type="number" id="height" name="height" step="1" min="0" max="1000"
+              placeholder="select height"><br><br>
+              <label> Width </label><br>
+              <input type="number" id="width" name="width" step="1" min="0" max="1000"
+              placeholder="select width"><br>
+              <label> Enter values: </label><br>
+          Value 1: <input type="number" name="a" id="a" /><br />
+          Value 2: <input type="number" name="b" id="b" /><br />
+          Value 3: <input type="number" name="c" id="c" /><br />
+          Value 4: <input type="number" name="d" id="d" /><br />
+          <label> Enter values: </label><br>
+          Category 1: <input type="text" name="a" id="e" /><br />
+          Category 2: <input type="text" name="b" id="f" /><br />
+          Category 3: <input type="text" name="c" id="g" /><br />
+          Category 4: <input type="text" name="d" id="h" /><br /><br><br>
+          <input type="button" value="Create Chart" onclick="drawChart(); show();"  />
+        </form><br><br><br>
+            <script
+            type="text/javascript"
+            src="https://www.gstatic.com/charts/loader.js"
+          ></script>
+      
+          <script type="text/javascript">
+            function show() {
+              document.getElementById("piechart").style.display = "block";
+            }
+            // Load google charts
+            google.charts.load("current", { packages: ["corechart"] });
+            google.charts.setOnLoadCallback(drawChart);
+            // Draw the chart and set the chart values
+            function drawChart() {
+              var c1 = document.getElementById("a").value;
+              var c2 = document.getElementById("b").value;
+              var c3 = document.getElementById("c").value;
+              var c4 = document.getElementById("d").value;
+              var c5 = document.getElementById("e").value;
+              var c6 = document.getElementById("f").value;
+              var c7 = document.getElementById("g").value;
+              var c8 = document.getElementById("h").value;
+              var data = google.visualization.arrayToDataTable([
+                ["Task", "Hours per Day"],
+                [ c5, parseInt(c1)],
+                [ c6, parseInt(c2)],
+                [ c7, parseInt(c4)],
+                [ c8, parseInt(c3)],
+              ]);
+      
+              // Optional; add a title and set the width and height of the chart
+              var options = { title: document.getElementById("ctitle").value, width: document.getElementById("width").value, height: document.getElementById("height").value };
+      
+              // Display the chart inside the <div> element with id="barchart"
+              var chart = new google.visualization.BarChart(
+                document.getElementById("barchart")
+              );
+              chart.draw(data, options);
+            }
+          </script>
         <label> Or upload your CSV file </label><br>
           <input type="file" id="real-file" hidden="hidden"/>
           <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

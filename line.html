@@ -82,33 +82,69 @@
       <h1>Line Chart</h1>
       <div class = "linechart">
         <h2>Customize your visualization</h2>
-      <form method="post" id="linechart" action="">
-          
+        <div style="display: none;" id="linechart"></div>
+        <form>
           <label> Chart Title </label><br>
-          <input type="text" name="ctitle" id="title"
-          placeholder="Enter your Chart Title"><br><br>
-          <label> X-Title </label><br>
-          <input type="text" name="xtitle" id="title"
-          placeholder="Enter your X-Title"><br><br>
-          <label> Y-Title </label><br>
-          <input type="text" name="ytitle" id="title"
-          placeholder="Enter your Y-Title"><br><br>
-          <label> Height </label><br>
-         <input type="number" id="height" name="height" step="1" min="0" max="1000"
-          placeholder="select height"><br><br>
-          <label> Width </label><br>
-          <input type="number" id="width" name="width" step="1" min="0" max="1000"
-          placeholder="select width"><br><br>
-          <div class="inline-div">
-            <p align="center">X-Values</p>
-            <textarea cols="15" rows="15" class="inline-txtarea"></textarea> 
-        </div>
-        <div class="inline-div">
-        <p align="center">Y-Values</p>
-            <textarea cols="15" rows="15" class="inline-txtarea"></textarea>  
-        </div><br><br>
-        <input type="submit"  id="CreateChart" value="Create Chart"  />
-        <br><br>
+              <input type="text" name="ctitle" id="ctitle"
+              placeholder="Enter your Chart Title"><br><br>
+              <label> Height </label><br>
+             <input type="number" id="height" name="height" step="1" min="0" max="1000"
+              placeholder="select height"><br><br>
+              <label> Width </label><br>
+              <input type="number" id="width" name="width" step="1" min="0" max="1000"
+              placeholder="select width"><br>
+              <label> Enter values: </label><br>
+          Value 1: <input type="number" name="a" id="a" /><br />
+          Value 2: <input type="number" name="b" id="b" /><br />
+          Value 3: <input type="number" name="c" id="c" /><br />
+          Value 4: <input type="number" name="d" id="d" /><br />
+          <label> Enter values: </label><br>
+          Category 1: <input type="text" name="a" id="e" /><br />
+          Category 2: <input type="text" name="b" id="f" /><br />
+          Category 3: <input type="text" name="c" id="g" /><br />
+          Category 4: <input type="text" name="d" id="h" /><br /><br><br>
+          <input type="button" value="Create Chart" onclick="drawChart(); show();"  />
+        </form><br><br><br>
+            <script
+            type="text/javascript"
+            src="https://www.gstatic.com/charts/loader.js"
+          ></script>
+      
+          <script type="text/javascript">
+            function show() {
+              document.getElementById("linechart").style.display = "block";
+            }
+            // Load google charts
+            google.charts.load("current", { packages: ["corechart"] });
+            google.charts.setOnLoadCallback(drawChart);
+            // Draw the chart and set the chart values
+            function drawChart() {
+              var c1 = document.getElementById("a").value;
+              var c2 = document.getElementById("b").value;
+              var c3 = document.getElementById("c").value;
+              var c4 = document.getElementById("d").value;
+              var c5 = document.getElementById("e").value;
+              var c6 = document.getElementById("f").value;
+              var c7 = document.getElementById("g").value;
+              var c8 = document.getElementById("h").value;
+              var data = google.visualization.arrayToDataTable([
+                ["Task", "Hours per Day"],
+                [ c5, parseInt(c1)],
+                [ c6, parseInt(c2)],
+                [ c7, parseInt(c4)],
+                [ c8, parseInt(c3)],
+              ]);
+      
+              // Optional; add a title and set the width and height of the chart
+              var options = { title: document.getElementById("ctitle").value, width: document.getElementById("width").value, height: document.getElementById("height").value };
+      
+              // Display the chart inside the <div> element with id="linechart"
+              var chart = new google.visualization.LineChart(
+                document.getElementById("linechart")
+              );
+              chart.draw(data, options);
+            }
+          </script>
         <label> Or upload your CSV file </label><br>
           <input type="file" id="real-file" hidden="hidden"/>
           <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
